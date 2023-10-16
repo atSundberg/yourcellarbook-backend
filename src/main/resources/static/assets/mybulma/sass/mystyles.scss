@@ -1,0 +1,231 @@
+@charset "utf-8";
+
+
+// Import a Google Font
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,700;1,100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+
+//global settings
+body {
+    margin: 0;
+}
+
+.is-fullheight {
+    height: 100vh;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+// Set your brand colors
+$purple: #756E91;
+$dark-purple: #2F0A28;
+$pink: #FA7C91;
+$brown: #757763;
+$beige-light: #D0D1CD;
+$beige-lighter: #EFF0EB;
+$champagne: #E8D4C0;
+$scallop-seashell: #E4D7D0;
+$scallop-red: #F0B4A9;
+$teal-green: #4B8378;
+$dark-blue: #1E2640;
+$burnt-orange: #E36920;
+$amber: #EFA710;
+$my-yellow: #FDB833;
+$classic: #E9E9E9;
+$olive-green: #3D550C;
+$green: #4e6d2e;
+$teal-blue: #005C6C;
+$sky-blue: #BEFCFD;
+$blue-green: #7FD1AE;
+$dark-green: #454839;
+$darker-green: #1A1F16;
+$light-blue: #D9F3FF;
+$lavender: #E3EBFF;
+$dazz-blue: #445E93;
+$mint: #A8C69F;
+$mango-tango: #F0803C;
+$violet: #0D0630;
+$bald: #F2F2F2;
+$red-salsa: #F93943;
+$blanched-almond: #FCECC9;
+$aero: #7EB2DD;
+$aero-light: #ACB7AB;
+$daz-blue: #445E93;
+$emerald: #4E937A;
+$pop: #4784FF;
+$pop-contrast: #ff4784;
+
+//'trending'
+$mustard: #E3B448;
+$sage: #CBD18F;
+$forest-green: #3A6B35;
+
+
+//grayscale colors
+$darkish: #212529;
+$mid-dark: #343a40;
+$midi-dark: #6c757d;
+$midi-light: #adb5bd;
+$mid-light: #ced4da;
+$mid-lighter: #dee2e6;
+$grey-pop: #e0afa0;
+
+//test
+$a: #9999a1;
+$b: #000000;
+$c: #f4f4f6;
+$d: #f3f3f3;
+
+
+// $nav-gradient: linear-gradient(#e66465, #9198e5);
+// $nav-gradient: linear-gradient(to bottom, $aero 5%, rgba(199,221,255,1) 100%);
+$nav-gradient: linear-gradient(to bottom, white 10%, $beige-light 100%);
+$poly-gradient: linear-gradient(to top right, rgba(68,94,147,1) 25%, rgba(71,132,255,1) 69%);
+
+// Update Bulma's global variables
+$font-nunito: "Nunito", sans-serif;
+$dancing: 'Dancing Script', cursive;
+$family-secondary: $dancing;
+$family-primary: $font-nunito;
+// $family-sans-serif: "Montserrat", sans-serif;
+// $grey-dark: $brown;
+$grey-dark: $dark-purple;
+$grey-light: $beige-light;
+// $link: $daz-blue;
+// $success: $pop;
+// $primary: $pop-contrast;
+$link: $b;
+
+$success: $mustard;
+$primary: $a;
+
+$widescreen-enabled: false;
+$fullhd-enabled: false;
+
+
+// Update some of Bulma's component variables
+
+// $body-background-color: $sage;
+
+// $body-background-color: $bald;
+
+// $body-background-color: $blanched-almond;
+$control-border-width: 2px;
+$input-border-color: $beige-lighter;
+$input-shadow: none;
+
+// Update header variables
+// $navbar-background-color: $mint;
+$navbar-background-color: $mustard;
+// $navbar-background-color: $nav-gradient;
+
+
+
+// Update footer variables
+// $footer-background-color: $champagne;
+$footer-padding: 2rem 1rem 3rem;
+
+// Update table variables
+// $table-background-color: $aero;
+// $table-striped-row-even-background-color: $champagne;
+
+// Update box variables
+$box-background-color: $mustard;
+
+// Update card variables
+
+.modal {
+    position: fixed !important; /* Set modal to fixed position */
+}
+
+.background-section1 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff; /* Text color for both sections */
+    background-color: $mustard;
+    
+    //transition: background-color 0.5s; /* Transition effect for background color change */
+}
+.background-section2 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff; /* Text color for both sections */
+    background-color: $mustard;
+    transition: background-color 3s; /* Transition effect for background color change */
+
+}
+.background-section2.changed {
+    background-color: #783937;
+    transition: background-color 2s;
+}
+.background-section3 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff; /* Text color for both sections */
+    background-color: #783937;
+    transition: background-color 3s; /* Transition effect for background color change */
+}
+.background-section3.changed {
+    background-color: $mustard;
+    transition: background-color 2s;
+}
+
+.navbar {
+    background-image: $a;
+}
+
+svg {
+    position: absolute;
+    margin: 0px;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+  }
+  polygon {
+    fill: url(#grad);
+  }
+  .vector > span {
+    position: absolute;
+    display: block;
+    padding: 0px;  
+    z-index: 1;
+  }
+  .vector.bottom > span{
+    height: 50%;
+    width: 100%;
+    top: 5px;
+    left: 5px;  
+  }
+// .navbar {
+//     $navbar-background-color: linear-gradient(130deg, #A66CFF 50%, #9C9EFE 50%);
+//     background-image: $navbar-background-color;
+// }
+
+
+
+@import "bulma";
+// Import only what you need from Bulma
+
+@import "all";
+@import "all";
+@import "button";
+@import "container";
+@import "title";
+@import "table";
+@import "all";
+@import "navbar";
+@import "footer";
+@import "hero";
+@import "section";

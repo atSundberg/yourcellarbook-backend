@@ -1,0 +1,59 @@
+Sparkling;N.V;Arnaud Lambert;Brézé;Chenin Blanc, Chardonnay;Loire;France;
+Sparkling;2014;Alto Alella;Mirgin Opus;Chardonnay, Pansa Blanca;Katalonien;Spain;
+Sparkling;2015;Augusti Torelló;Mata;Macabeo;Katalonien;Spain;
+
+
+White;2018;Le Grappin;Savigny-les-Beaune;Chardonnay;Bourgogne;France;
+White;2018;Le Grappin;Saint Aubin en l’Ebaupin;Chardonnay;Bourgogne;France;
+White;2018;Le Grappin;Beaune Premier Cru Les Grèves;Chardonnay;Bourgogne;France;
+White;2017;Domaine Pattes Loup;Mis Tardive;Chardonnay;Chablis;France;
+White;2018;Domaine du Pélican;Pélican;Savignin;Jura;France;
+White;2015;Claude Buchot;Terroir du Bry Tradition;Chardonnay;Jura;France;
+White;2017;Domaine de La Loue;Carbone;Chardonnay;Jura;France;
+White;2014;Francois Rousset-Martin;Les Macrins;Chardonnay;Jura;France;
+White;2018;Château du Hureau;Argile;Chenin Blanc;Loire;France;
+White;2017;Earl Derame;Les Roches Gaudiniéres;Melon de Bourgogne;Loire;France;
+White;2018;Vassaltis;Assyrtiko;Assyrtiko;Santorini;Greece;
+White;2018;Gaia;Wild Ferment Assyrtiko;Assyrtiko;Santorini;Greece;
+White;2018;The Sadie Family;Skerpioen;Chenin Blanc, Palomino;Swartland;South Africa;
+White;2017;Elemental Bob;The Rupert;Chenin Blanc;Stellenbosch;South Africa;
+White;2019;Crystallum;The Agnes;Chardonnay;Western Cape;South Africa;
+White;2019;Crystallum;Clay Shales;Chardonnay;Hemel-en-Aarde;South Africa;
+White;2018;Keller;Kabinett Limestone;Riesling;Rheinhessen;Germany;
+White;2017;Stolpman Vineyards;Combe Cuvee August;Chenin Blanc;Ballard Canyon;USA;
+White;2018;Domäne Wachau;Ried Achleiten Smaragd;Riesling;Wachau;Austria;
+White;2018;Weingut Josef Jamek;Ried Frauengarten;Grüner Veltliner;Wachau;Austria;
+
+
+Red;2019;Timo Mayer;Dr.Mayer;Pinot Noir;Yarra Valley;Australia;
+Red;2017;Château Le Puy;Le Puy Emilien;Merlot;Bordeaux;France;
+Red;2017;G. Descombes;Morgon;Gamay;Beaujolais;France;
+Red;2018;Le Grappin;Savigny-les-Beaune;Pinot Noir;Bourgogne;France;
+Red;2018;Le Grappin;Santenay Premier Cru Les Gravières;Pinot Noir;Bourgogne;France;
+Red;2018;Le Grappin;Beaune Premier Cru Boucherottes;Pinot Noir;Bourgogne;France;
+Red;2018;Domaine Faiveley;Mercurey La Framboisière Monopole;Pinot Noir;Bourgogne;France;
+Red;2016;Domaine Gérard Courbis;Cornas;Syrah;Cornas;France;
+Red;2018;Bruyére Renaud & Houillon Adeline;Arbois-Pupillin;Ploussard;Jura;France;
+Red;2018;Domaine L’Aigle À Deux Têtes;Les Clous;Poulsard;Jura;France;
+Red;2018;l’Octivin;Boire du Tr… n’est jamais une corvée;Trousseau;Jura;France;
+Red;2018;l’Octivin;Dora Bella;Poulsard;Jura;France;
+Red;2019;Laurent Herlin;Tsoin Tsoin;Cabernet Franc, Gamay;Loire;France;
+Red;2017;Olga Raffault;Les Peuilles;Cabernet Franc;Loire;France;
+Red;2018;Château du Hureau;Tuffe ;Cabernet Franc;Loire;France;
+Red;2017;Le Rocher des Violettes;Cot;Malbec;Loire;France;
+Red;2019;Lamoresca di Filippo Rizzo;Nerocapitano;Frappato;Sicilia;Italy;
+Red;2018;Frank Cornelissen;Susucaru Rosso;Nerello Mascalese;Etna;Italy;
+Red;2019;Frank Cornelissen;Susucaru Rosato;Nerello Mascalese, Nerello Capuccio;Etna;Italy;
+Red;2018;Frank Cornelissen;Munjabel Rosso;Nerello Mascalese;Etna;Italy;
+Red;2017;O Esterio;Albamar;Mencía, Caiño, Espadeiro;Rías Baixas;Spain;
+Red;2018;The Sadie Family;Soldaat;Grenache;Swartland;South Africa;
+Red;2019;Crystallum;Peter Max;Pinot Noir;Western Cape;South Africa;
+Red;2019;Crystallum;Cuvée Cinema;Pinot Noir;Hemel-en-Aarde;South Africa;
+Red;2019;Crystallum;Mabalel;Pinot Noir;Elandskloof;South Africa;
+Red;2019;Stolpman Vineyards;Combe;Trousseau;Ballard Canyon;USA;
+Red;2019;Stolpman Vineyards;Love You Bunches;Sangiovese;Santa Barbara County;USA;
+Red;2017;Kutch;Pinot Noir;Pinot Noir;Sonoma Coast;USA;
+
+
+Sweet;2011;Henri Maire;Vin Jaune;Savignin;Château-Chalon;France;
+Sweet;2018;Cascina Vano;Moscato d’Asti;Moscato;Piemonte;Italy;
