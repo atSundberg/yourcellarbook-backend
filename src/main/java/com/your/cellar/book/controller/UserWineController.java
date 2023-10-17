@@ -5,6 +5,9 @@ import com.your.cellar.book.dto.UserWineDto;
 import com.your.cellar.book.repository.UserWineRepository;
 import com.your.cellar.book.service.UserWineService;
 import com.your.cellar.book.service.WineService;
+import lombok.extern.java.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -19,6 +22,7 @@ import java.util.Set;
 @RequestMapping(path = "/user/wine")
 public class UserWineController {
 
+    private static final Logger LOG = LoggerFactory.getLogger(WineController.class.getName());
     private MessageSource messageSource;
     private UserWineService userWineService;
     private WineService wineService;
@@ -53,6 +57,7 @@ public class UserWineController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BaseResponse<UserWineDto>> addNewUserWine(@RequestBody UserWineDto userWineRequestDto) {
+        LOG.info("UserWine to add: {}", userWineRequestDto);
         UserWineDto userWineDto = userWineService.createNewUserWine(userWineRequestDto);
 
         if (userWineDto != null) {

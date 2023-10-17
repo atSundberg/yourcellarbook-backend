@@ -19,6 +19,9 @@ public class WineRequestModel {
     @JsonProperty("wine_id")
     private Integer wineId;
 
+    @JsonProperty("name")
+    private String name;
+
     @JsonProperty("producer")
     private Producer producer;
 
