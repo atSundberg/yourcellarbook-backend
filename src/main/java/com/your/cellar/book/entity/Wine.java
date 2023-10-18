@@ -23,10 +23,6 @@ public class Wine {
     @Column(name = "wine_id")
     private Long wineId;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
-//    private User user;
-
     private String name;
 
     @ManyToOne

@@ -1,6 +1,8 @@
 package com.your.cellar.book.controller;
 
 import com.your.cellar.book.dto.BaseResponse;
+import com.your.cellar.book.dto.request.UserRequestModel;
+import com.your.cellar.book.dto.response.UserResponseModel;
 import com.your.cellar.book.entity.User;
 import com.your.cellar.book.service.UserService;
 import org.slf4j.Logger;
@@ -19,7 +21,6 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin(origins = "*")
 public class UserController {
 
     private final UserService userService;
@@ -68,23 +69,23 @@ public class UserController {
     }
 
 
-    /*@PostMapping(value = "/signup",
+    @PostMapping(value = "/signup",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BaseResponse<User>> createUser(@RequestBody User newUser) {
-        logger.info("Input user: {}", newUser);
+    public ResponseEntity<BaseResponse<UserResponseModel>> createUser(@RequestBody UserRequestModel userRequestModel) {
+        logger.info("Input user: {}", userRequestModel);
 
-        User user = userService.createUser(newUser);
+        UserResponseModel userResponseModel = userService.createUser(userRequestModel);
 
-        if (user != null) {
-            BaseResponse<User> response = new BaseResponse<>(
+        if (userResponseModel != null) {
+            BaseResponse<UserResponseModel> response = new BaseResponse<>(
                     HttpStatus.CREATED.value(),
                     messageSource.getMessage("user.creation.success", null, Locale.getDefault()),
-                    user
+                    userResponseModel
             );
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         } else {
-            BaseResponse<User> response = new BaseResponse<>(
+            BaseResponse<UserResponseModel> response = new BaseResponse<>(
                     HttpStatus.BAD_REQUEST.value(),
                     messageSource.getMessage("user.creation.error", null, Locale.getDefault()),
                     null
@@ -92,7 +93,7 @@ public class UserController {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
 
-    }*/
+    }
 
 
 

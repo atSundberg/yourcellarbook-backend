@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -70,8 +71,12 @@ public class UserWineService {
     public UserWineDto createNewUserWine(UserWineDto userWineRequestDto) {
         UserWine userWine = userWineConverter.userWineDtoToUserWine(userWineRequestDto);
         if (userWine.getId() != null && userWineRepository.findById(userWine.getId()).orElse(null) == null) {
+            userWine.setCreatedAt(LocalDateTime.now());
             userWine = userWineRepository.save(userWine);
-            return userWineConverter.userWineToUserWineDto(userWine);
+
+            UserWineDto userWineDto = userWineConverter.userWineToUserWineDto(userWine);
+            userWineDto.setWine(wineService.fetchWineById(userWine.getId().getWineId()));
+            return userWineDto;
         } else {
             return null;
         }

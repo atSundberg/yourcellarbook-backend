@@ -30,6 +30,9 @@ public class UserWineDto {
     @JsonProperty("is_finished")
     private boolean isFinished;
 
+    @JsonProperty("price")
+    private Integer price;
+
     @JsonProperty("wine")
     private Wine wine;
 

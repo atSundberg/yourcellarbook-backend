@@ -37,28 +37,32 @@ public class UserWine {
     @Column(name = "is_finished")
     private boolean isFinished;
 
+    @Column(name = "price")
+    private Integer price;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserWine userWine = (UserWine) o;
-        return isFinished == userWine.isFinished && Objects.equals(id, userWine.id) && Objects.equals(storingLocation, userWine.storingLocation) && Objects.equals(information, userWine.information) && Objects.equals(quantity, userWine.quantity) && Objects.equals(createdAt, userWine.createdAt);
+        return isFinished == userWine.isFinished && Objects.equals(id, userWine.id) && Objects.equals(storingLocation, userWine.storingLocation) && Objects.equals(information, userWine.information) && Objects.equals(quantity, userWine.quantity) && Objects.equals(createdAt, userWine.createdAt) && Objects.equals(price, userWine.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, storingLocation, information, quantity, createdAt, isFinished);
+        return Objects.hash(id, storingLocation, information, quantity, createdAt, isFinished, price);
     }
 
     @Override
     public String toString() {
         return "UserWine{" +
-                "userWineCompositeKey=" + id +
+                "id=" + id +
                 ", storingLocation='" + storingLocation + '\'' +
                 ", information='" + information + '\'' +
-                ", quantity=" + quantity + " btl" +
+                ", quantity=" + quantity +
                 ", createdAt=" + createdAt +
                 ", isFinished=" + isFinished +
+                ", price=" + price +
                 '}';
     }
 }

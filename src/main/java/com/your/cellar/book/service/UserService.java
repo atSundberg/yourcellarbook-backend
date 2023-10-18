@@ -1,5 +1,8 @@
 package com.your.cellar.book.service;
 
+import com.your.cellar.book.dto.converter.UserConverter;
+import com.your.cellar.book.dto.request.UserRequestModel;
+import com.your.cellar.book.dto.response.UserResponseModel;
 import com.your.cellar.book.entity.User;
 import com.your.cellar.book.repository.UserRepository;
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import com.your.cellar.book.repository.UserRepository;
 //import org.springframework.security.core.userdetails.UserDetailsService;
 //import org.springframework.security.core.userdetails.UsernameNotFoundException;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -20,17 +24,13 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private UserRepository userRepository;
+    private UserConverter userConverter;
 
-//    private BCryptPasswordEncoder passwordEncoder;
 
-    /*@Autowired
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+    @Autowired
+    public UserService(UserRepository userRepository, UserConverter userConverter) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }*/
-
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+        this.userConverter = userConverter;
     }
 
     public Set<User> fetchAllUsers() {
@@ -38,16 +38,18 @@ public class UserService {
         return users.stream().collect(Collectors.toSet());
     }
 
-/*    public User createUser(User user) {
-        if (userRepository.findByUsername(user.getUsername()) == null) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+    public UserResponseModel createUser(UserRequestModel userRequestModel) {
+        if (userRepository.findByUsername(userRequestModel.getUsername()) == null) {
+            User user = userConverter.userDtoToUser(userRequestModel);
+            user.setPassword(user.getPassword());
             user.setLastLoggedIn(LocalDateTime.now());
 
             user = userRepository.save(user);
-            return user;
+            return userConverter.userToUserDto(user);
         }
         return null;
-    }*/
+    }
 
     /*@Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

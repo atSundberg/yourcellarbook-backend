@@ -2,6 +2,7 @@ package com.your.cellar.book.dto.converter;
 
 import com.your.cellar.book.dto.UserWineDto;
 import com.your.cellar.book.entity.UserWine;
+import com.your.cellar.book.model.UserWineCompositeKey;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
