@@ -1,40 +1,62 @@
-/*
 package com.your.cellar.book.controller;
 
-import com.your.cellar.book.model.LoginRequest;
+import com.your.cellar.book.dto.AuthenticationResponse;
+import com.your.cellar.book.dto.BaseResponse;
+import com.your.cellar.book.dto.request.UserRequestModel;
 import com.your.cellar.book.service.TokenService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.*;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Locale;
+
+@Slf4j
 @RestController
-@CrossOrigin(origins = "*")
+@RequestMapping("/token")
 public class AuthController {
-
-    private static final Logger LOG = LoggerFactory.getLogger(AuthController.class);
-    private final AuthenticationManager authenticationManager;
     private final TokenService tokenService;
+    private final AuthenticationManager authenticationManager;
+    private MessageSource messageSource;
 
-
-    public AuthController(AuthenticationManager authenticationManager, TokenService tokenService) {
-        this.authenticationManager = authenticationManager;
+    @Autowired
+    public AuthController(TokenService tokenService, AuthenticationManager authenticationManager, MessageSource messageSource) {
         this.tokenService = tokenService;
+        this.authenticationManager = authenticationManager;
+        this.messageSource = messageSource;
     }
 
-    @PostMapping("/token")
-    public String token(@RequestBody LoginRequest userLogin) {
-        LOG.info("Token requested for user: '{}'", userLogin);
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userLogin.username(), userLogin.password()));
-        String token = tokenService.generateToken(authentication);
-        LOG.info("Token granted {}", token);
-        return token;
+    @PostMapping()
+    public ResponseEntity<BaseResponse<AuthenticationResponse>> token(@RequestBody UserRequestModel userRequestModel) throws AuthenticationException {
+        log.info("User to authenticate: {}", userRequestModel);
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userRequestModel.getUsername(), userRequestModel.getPassword()));
+        if (authentication.isAuthenticated()) {
+            AuthenticationResponse authenticationResponse = new AuthenticationResponse(tokenService.generateToken(authentication));
+            BaseResponse<AuthenticationResponse> response = new BaseResponse<>(
+                    HttpStatus.OK.value(),
+                    messageSource.getMessage("token.generated.successfully", null, Locale.getDefault()),
+                    authenticationResponse
+            );
+            return new ResponseEntity<>(response, HttpStatus.OK);
+
+        } else {
+            throw new UsernameNotFoundException("User not found");
+
+
+        }
     }
+
 }
 
-*/

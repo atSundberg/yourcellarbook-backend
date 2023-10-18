@@ -1,4 +1,3 @@
-/*
 package com.your.cellar.book.service;
 
 import org.springframework.security.core.Authentication;
@@ -15,10 +14,10 @@ import java.util.stream.Collectors;
 @Service
 public class TokenService {
 
-    private final JwtEncoder jwtEncoder;
+    private final JwtEncoder encoder;
 
-    public TokenService(JwtEncoder jwtEncoder) {
-        this.jwtEncoder = jwtEncoder;
+    public TokenService(JwtEncoder encoder) {
+        this.encoder = encoder;
     }
 
     public String generateToken(Authentication authentication) {
@@ -33,7 +32,7 @@ public class TokenService {
                 .subject(authentication.getName())
                 .claim("scope", scope)
                 .build();
-        return this.jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
+        return this.encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
     }
+
 }
-*/
