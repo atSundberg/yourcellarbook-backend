@@ -1,10 +1,10 @@
 insert into role (role_id, role_name) VALUES(1, 'ADMIN');
 insert into role (role_id, role_name) VALUES(2, 'USER');
 
-insert into users (username, password, enabled, last_logged_in) VALUES('admin', 'password', true, CURRENT_TIMESTAMP);
+insert into users (username, password, enabled, last_logged_in) VALUES('adam', '$2a$10$IK8rufks2LaOul0uby.b5uy27YEF0bYFE4t5ZNZq/7397FAGOgj3O', true, CURRENT_TIMESTAMP);
 
 insert into user_role (user_id, role_id) VALUES(1, 1);
-
+/*
 select * from users ;
 
 
@@ -171,4 +171,4 @@ INSERT INTO user_wine (user_id, wine_id, storing_location, information, quantity
 
 
 -- category
--- , '', 'base', 1, CURRENT_TIMESTAMP, false
+-- , '', 'base', 1, CURRENT_TIMESTAMP, false*/

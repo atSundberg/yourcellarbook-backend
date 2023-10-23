@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 //import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.management.relation.RoleNotFoundException;
 import java.util.Locale;
 import java.util.Set;
 
@@ -72,7 +73,7 @@ public class UserController {
     @PostMapping(value = "/signup",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BaseResponse<UserResponseModel>> createUser(@RequestBody UserRequestModel userRequestModel) {
+    public ResponseEntity<BaseResponse<UserResponseModel>> createUser(@RequestBody UserRequestModel userRequestModel) throws RoleNotFoundException {
         logger.info("Input user: {}", userRequestModel);
 
         UserResponseModel userResponseModel = userService.createUser(userRequestModel);
