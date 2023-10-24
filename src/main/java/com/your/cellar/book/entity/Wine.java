@@ -45,18 +45,8 @@ public class Wine {
     )
     private Set<Grape> grapes = new HashSet<>();
 
-//    private String information;
-//
-//    @Column(name = "storing_location")
-//    private String storingLocation;
-
+    @Enumerated(EnumType.STRING)
     private Category category;
-
-//    @Column(name = "created_at")
-//    private LocalDateTime createdAt;
-//
-//    @Column(name = "is_finished")
-//    private boolean isFinished = false;
 
     @Override
     public boolean equals(Object o) {
