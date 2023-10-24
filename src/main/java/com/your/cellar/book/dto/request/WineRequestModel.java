@@ -17,7 +17,7 @@ import java.util.Set;
 public class WineRequestModel {
 
     @JsonProperty("wine_id")
-    private Integer wineId;
+    private Long wineId;
 
     @JsonProperty("name")
     private String name;

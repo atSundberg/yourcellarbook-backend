@@ -13,7 +13,7 @@ import java.util.Set;
 public class UserResponseModel {
 
     @JsonProperty("user_id")
-    private Integer userId;
+    private Long userId;
 
     @JsonProperty("username")
     private String username;
