@@ -3,6 +3,7 @@ package com.your.cellar.book.dto.request;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.your.cellar.book.dto.RoleDto;
 import com.your.cellar.book.entity.Role;
+import jakarta.persistence.Column;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +21,12 @@ public class UserRequestModel {
 
     @JsonProperty("enabled")
     private boolean enabled;
+
+    @JsonProperty("showWineList")
+    private boolean showWineList;
+
+    @JsonProperty("wineListName")
+    private String wineListName;
 
     @JsonProperty("roles")
     private Set<RoleDto> roles;

@@ -69,6 +69,7 @@ public class UserService implements UserDetailsService {
             User user = userConverter.userDtoToUser(userRequestModel);
             user.setRoles(roles);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setWineListName(null);
             user.setLastLoggedIn(LocalDateTime.now());
 
             user = userRepository.save(user);
@@ -98,6 +99,27 @@ public class UserService implements UserDetailsService {
     public UserResponseModel fetchUserByUsername(String username) {
         User user = userRepository.findByUsername(username);
         if (user != null) {
+            return userConverter.userToUserDto(user);
+        }
+        return null;
+    }
+
+    public boolean getShowWineListStatusByUser(Long userId) {
+        User user = userRepository.findById(userId).orElse(null);
+
+        if (user != null) {
+            return user.isShowWineList();
+        }
+        return false;
+    }
+
+    public UserResponseModel updateShowWineListStatus(UserRequestModel userRequestModel) {
+        User user = userRepository.findByUsername(userRequestModel.getUsername());
+
+        if (user != null) {
+            user.setShowWineList(userRequestModel.isShowWineList());
+            user.setWineListName(userRequestModel.getWineListName());
+            user = userRepository.save(user);
             return userConverter.userToUserDto(user);
         }
         return null;

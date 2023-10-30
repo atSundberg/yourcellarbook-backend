@@ -17,7 +17,6 @@ public class Grape {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "grape_id")
     private Long grapeId;
 
     private String name;

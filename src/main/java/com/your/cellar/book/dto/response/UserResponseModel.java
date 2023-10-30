@@ -18,4 +18,10 @@ public class UserResponseModel {
     @JsonProperty("username")
     private String username;
 
+    @JsonProperty("showWineList")
+    private boolean showWineList;
+
+    @JsonProperty("wineListName")
+    private String wineListName;
+
 }

@@ -12,4 +12,5 @@ public interface UserWineRepository extends JpaRepository<UserWine, UserWineComp
 
     @Query("SELECT e FROM UserWine e WHERE e.id.userId = :userId")
     List<UserWine> findByUserId(@Param("userId") Long userId);
+
 }
