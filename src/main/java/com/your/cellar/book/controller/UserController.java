@@ -34,20 +34,6 @@ public class UserController {
         this.messageSource = messageSource;
     }
 
-/*    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BaseResponse<String>> getUserResponse() {
-        BaseResponse<String> response =
-                new BaseResponse<>(
-                        HttpStatus.OK.value(),
-                        "Working user response",
-                        "I AM ADAM"
-                );
-
-        logger.info(response.toString());
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }*/
-
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping
     public ResponseEntity<BaseResponse<Set<User>>> getAllUsers() {
         Set<User> users = userService.fetchAllUsers();
@@ -63,6 +49,27 @@ public class UserController {
             BaseResponse<Set<User>> response = new BaseResponse<>(
                     HttpStatus.BAD_REQUEST.value(),
                     messageSource.getMessage("user.fetch.all.error", null, Locale.getDefault()),
+                    null
+            );
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(path = "/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<BaseResponse<UserResponseModel>> getUserByUsername(@PathVariable String username) {
+        UserResponseModel userResponseModel = userService.fetchUserByUsername(username);
+
+        if (userResponseModel != null) {
+            BaseResponse<UserResponseModel> response = new BaseResponse<>(
+                    HttpStatus.OK.value(),
+                    messageSource.getMessage("user.fetch.by.username.success", null, Locale.getDefault()),
+                    userResponseModel
+            );
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            BaseResponse<UserResponseModel> response = new BaseResponse<>(
+                    HttpStatus.BAD_REQUEST.value(),
+                    messageSource.getMessage("user.fetch.by.username.error", null, Locale.getDefault()),
                     null
             );
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -93,7 +100,28 @@ public class UserController {
                     );
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
+    }
 
+    @PutMapping(path = "/winelist", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<BaseResponse<UserResponseModel>> updateShowWineList(@RequestBody UserRequestModel userRequestModel) {
+
+        UserResponseModel userResponseModel = userService.updateShowWineListStatus(userRequestModel);
+
+        if (userResponseModel != null) {
+            BaseResponse<UserResponseModel> response = new BaseResponse<>(
+                    HttpStatus.OK.value(),
+                    messageSource.getMessage("user.update.show.wines.success", null, Locale.getDefault()),
+                    userResponseModel
+            );
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            BaseResponse<UserResponseModel> response = new BaseResponse<>(
+                    HttpStatus.BAD_REQUEST.value(),
+                    messageSource.getMessage("user.update.show.wines.error", null, Locale.getDefault()),
+                    null
+            );
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
     }
 
 

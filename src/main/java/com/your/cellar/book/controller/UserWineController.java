@@ -2,6 +2,7 @@ package com.your.cellar.book.controller;
 
 import com.your.cellar.book.dto.BaseResponse;
 import com.your.cellar.book.dto.UserWineDto;
+import com.your.cellar.book.dto.UserWinePublicDto;
 import com.your.cellar.book.repository.UserWineRepository;
 import com.your.cellar.book.service.UserWineService;
 import com.your.cellar.book.service.WineService;
@@ -50,7 +51,7 @@ public class UserWineController {
                     HttpStatus.BAD_REQUEST.value(),
                     messageSource.getMessage("user.wine.fetch.all.error", null, Locale.getDefault()),
                     null
-                    );
+            );
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
@@ -115,6 +116,49 @@ public class UserWineController {
             );
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @PutMapping(path = "/isPublic", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<BaseResponse<UserWineDto>> updatePublicStatus(@RequestBody UserWineDto userWineRequestDto) {
+        UserWineDto userWineDto = userWineService.updateUserWinePublicStatus(userWineRequestDto);
+
+        if (userWineDto != null) {
+            BaseResponse<UserWineDto> response = new BaseResponse<>(
+                    HttpStatus.OK.value(),
+                    messageSource.getMessage("user.wine.public.status.update.success", null, Locale.getDefault()),
+                    userWineDto);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            BaseResponse<UserWineDto> response = new BaseResponse<>(
+                    HttpStatus.BAD_REQUEST.value(),
+                    messageSource.getMessage("user.wine.public.status.update.error", null, Locale.getDefault()),
+                    null
+            );
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+    @GetMapping(path = "/public", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<BaseResponse<Set<Set<UserWinePublicDto>>>> getAllPublicWines() {
+        LOG.info("Inside GetAllPublicWines");
+        Set<Set<UserWinePublicDto>> userWineDtoSets = userWineService.fetchAllPublicWines();
+
+        if (userWineDtoSets != null) {
+            BaseResponse<Set<Set<UserWinePublicDto>>> response = new BaseResponse<>(
+                    HttpStatus.OK.value(),
+                    messageSource.getMessage("user.wine.fetch.all.public.success", null, Locale.getDefault()),
+                    userWineDtoSets);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            BaseResponse<Set<Set<UserWinePublicDto>>> response = new BaseResponse<>(
+                    HttpStatus.BAD_REQUEST.value(),
+                    messageSource.getMessage("user.wine.fetch.all.public.error", null, Locale.getDefault()),
+                    null
+            );
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+
     }
 
 }

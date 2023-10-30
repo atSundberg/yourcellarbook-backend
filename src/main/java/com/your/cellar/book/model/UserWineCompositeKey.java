@@ -11,10 +11,8 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class UserWineCompositeKey implements Serializable {
 
-    @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "wine_id")
     private Long wineId;
 
     @Override

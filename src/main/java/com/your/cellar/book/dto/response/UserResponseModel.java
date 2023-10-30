@@ -13,15 +13,15 @@ import java.util.Set;
 public class UserResponseModel {
 
     @JsonProperty("user_id")
-    private Integer userId;
+    private Long userId;
 
     @JsonProperty("username")
     private String username;
 
-    @JsonProperty("password")
-    private String password;
+    @JsonProperty("showWineList")
+    private boolean showWineList;
 
-    @JsonProperty("roles")
-    private Set<RoleDto> roles;
+    @JsonProperty("wineListName")
+    private String wineListName;
 
 }

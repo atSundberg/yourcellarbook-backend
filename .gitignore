@@ -35,3 +35,5 @@ build/
 ### VS Code ###
 .vscode/
 /src/main/resources/application-dev.properties
+/archive/
+/src/main/resources/data/

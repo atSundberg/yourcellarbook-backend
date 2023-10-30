@@ -51,8 +51,11 @@ public class WineService {
     public WineResponseModel addWine(WineRequestModel wineRequestModel) {
         Wine wine = wineConverter.wineDtoToWine(wineRequestModel);
 
+        LOG.info("Converted wine: {}", wine);
+
         if (wineAlreadyExists(wine)) {
-            return wineConverter.wineToWineDto(wine);
+            LOG.info("Converted wineDtoResponse: {}", wineConverter.wineToWineDto(getExistingWine(wine)));
+            return wineConverter.wineToWineDto(getExistingWine(wine));
         }
 
         if (wine != null) {
@@ -72,18 +75,24 @@ public class WineService {
 
     private boolean wineAlreadyExists(Wine wine) {
         LOG.info("Wine to check for existence: {}", wine);
-        List<Wine> wines = wineRepository.findAll();
-        for (Wine existingWine : wines) {
+        Wine existingWine = getExistingWine(wine);
+        return existingWine != null;
+    }
+
+    private Wine getExistingWine(Wine wine) {
+        List<Wine> existingWines = wineRepository.findAll();
+        for (Wine existingWine : existingWines) {
             if (existingWine.getCategory().equals(wine.getCategory()) &&
                     existingWine.getName().equals(wine.getName()) &&
                     existingWine.getProducer().equals(wine.getProducer()) &&
                     Objects.equals(existingWine.getVintage(), wine.getVintage())) {
 
                 LOG.info("Wine already exists: {}", existingWine);
-                return true;
+                return existingWine;
             }
         }
-        return false;
+        return null;
+
     }
 
 

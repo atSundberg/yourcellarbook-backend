@@ -20,7 +20,6 @@ public class Wine {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "wine_id")
     private Long wineId;
 
     private String name;
@@ -40,23 +39,13 @@ public class Wine {
     @ManyToMany
     @JoinTable(
             name = "wine_grape",
-            joinColumns = @JoinColumn(name = "wine_id"),
-            inverseJoinColumns = @JoinColumn(name = "grape_id")
+            joinColumns = @JoinColumn(name = "wineId"),
+            inverseJoinColumns = @JoinColumn(name = "grapeId")
     )
     private Set<Grape> grapes = new HashSet<>();
 
-//    private String information;
-//
-//    @Column(name = "storing_location")
-//    private String storingLocation;
-
+    @Enumerated(EnumType.STRING)
     private Category category;
-
-//    @Column(name = "created_at")
-//    private LocalDateTime createdAt;
-//
-//    @Column(name = "is_finished")
-//    private boolean isFinished = false;
 
     @Override
     public boolean equals(Object o) {
