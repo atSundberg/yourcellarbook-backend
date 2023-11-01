@@ -12,7 +12,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-//import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.management.relation.RoleNotFoundException;
@@ -39,18 +39,10 @@ public class UserController {
         Set<User> users = userService.fetchAllUsers();
 
         if (users != null) {
-            BaseResponse<Set<User>> response = new BaseResponse<>(
-                    HttpStatus.OK.value(),
-                    messageSource.getMessage("user.fetch.all.success", null, Locale.getDefault()),
-                    users
-            );
+            BaseResponse<Set<User>> response = new BaseResponse<>(HttpStatus.OK.value(), messageSource.getMessage("user.fetch.all.success", null, Locale.getDefault()), users);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
-            BaseResponse<Set<User>> response = new BaseResponse<>(
-                    HttpStatus.BAD_REQUEST.value(),
-                    messageSource.getMessage("user.fetch.all.error", null, Locale.getDefault()),
-                    null
-            );
+            BaseResponse<Set<User>> response = new BaseResponse<>(HttpStatus.BAD_REQUEST.value(), messageSource.getMessage("user.fetch.all.error", null, Locale.getDefault()), null);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
@@ -60,44 +52,26 @@ public class UserController {
         UserResponseModel userResponseModel = userService.fetchUserByUsername(username);
 
         if (userResponseModel != null) {
-            BaseResponse<UserResponseModel> response = new BaseResponse<>(
-                    HttpStatus.OK.value(),
-                    messageSource.getMessage("user.fetch.by.username.success", null, Locale.getDefault()),
-                    userResponseModel
-            );
+            BaseResponse<UserResponseModel> response = new BaseResponse<>(HttpStatus.OK.value(), messageSource.getMessage("user.fetch.by.username.success", null, Locale.getDefault()), userResponseModel);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
-            BaseResponse<UserResponseModel> response = new BaseResponse<>(
-                    HttpStatus.BAD_REQUEST.value(),
-                    messageSource.getMessage("user.fetch.by.username.error", null, Locale.getDefault()),
-                    null
-            );
+            BaseResponse<UserResponseModel> response = new BaseResponse<>(HttpStatus.BAD_REQUEST.value(), messageSource.getMessage("user.fetch.by.username.error", null, Locale.getDefault()), null);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
 
 
-    @PostMapping(value = "/signup",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/signup", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BaseResponse<UserResponseModel>> createUser(@RequestBody UserRequestModel userRequestModel) throws RoleNotFoundException {
         logger.info("Input user: {}", userRequestModel);
 
         UserResponseModel userResponseModel = userService.createUser(userRequestModel);
 
         if (userResponseModel != null) {
-            BaseResponse<UserResponseModel> response = new BaseResponse<>(
-                    HttpStatus.CREATED.value(),
-                    messageSource.getMessage("user.creation.success", null, Locale.getDefault()),
-                    userResponseModel
-            );
+            BaseResponse<UserResponseModel> response = new BaseResponse<>(HttpStatus.CREATED.value(), messageSource.getMessage("user.creation.success", null, Locale.getDefault()), userResponseModel);
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         } else {
-            BaseResponse<UserResponseModel> response = new BaseResponse<>(
-                    HttpStatus.BAD_REQUEST.value(),
-                    messageSource.getMessage("user.creation.error", null, Locale.getDefault()),
-                    null
-                    );
+            BaseResponse<UserResponseModel> response = new BaseResponse<>(HttpStatus.BAD_REQUEST.value(), messageSource.getMessage("user.creation.error", null, Locale.getDefault()), null);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
@@ -108,23 +82,28 @@ public class UserController {
         UserResponseModel userResponseModel = userService.updateShowWineListStatus(userRequestModel);
 
         if (userResponseModel != null) {
-            BaseResponse<UserResponseModel> response = new BaseResponse<>(
-                    HttpStatus.OK.value(),
-                    messageSource.getMessage("user.update.show.wines.success", null, Locale.getDefault()),
-                    userResponseModel
-            );
+            BaseResponse<UserResponseModel> response = new BaseResponse<>(HttpStatus.OK.value(), messageSource.getMessage("user.update.show.wines.success", null, Locale.getDefault()), userResponseModel);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
-            BaseResponse<UserResponseModel> response = new BaseResponse<>(
-                    HttpStatus.BAD_REQUEST.value(),
-                    messageSource.getMessage("user.update.show.wines.error", null, Locale.getDefault()),
-                    null
-            );
+            BaseResponse<UserResponseModel> response = new BaseResponse<>(HttpStatus.BAD_REQUEST.value(), messageSource.getMessage("user.update.show.wines.error", null, Locale.getDefault()), null);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
 
+    @DeleteMapping(value = "/delete", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
+    public ResponseEntity<BaseResponse<UserResponseModel>> deleteUser(@RequestBody UserRequestModel userRequestModel) {
+        UserResponseModel userResponseModel = userService.deleteUser(userRequestModel);
 
+        if (userResponseModel != null) {
+            BaseResponse<UserResponseModel> response = new BaseResponse<>(HttpStatus.OK.value(), messageSource.getMessage("user.delete.success", null, Locale.getDefault()), userResponseModel);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            BaseResponse<UserResponseModel> response = new BaseResponse<>(HttpStatus.BAD_REQUEST.value(), messageSource.getMessage("user.delete.error", null, Locale.getDefault()), null);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+
+    }
 
 
 }
