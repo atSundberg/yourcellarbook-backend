@@ -15,6 +15,7 @@ import com.your.cellar.book.repository.UserRepository;
 //import org.springframework.security.core.userdetails.UserDetailsService;
 //import org.springframework.security.core.userdetails.UsernameNotFoundException;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -123,6 +124,23 @@ public class UserService implements UserDetailsService {
             return userConverter.userToUserDto(user);
         }
         return null;
+    }
+
+    @Transactional
+    public UserResponseModel deleteUser(UserRequestModel userRequestModel) {
+        User user = userRepository.findByUsername(userRequestModel.getUsername());
+        if (user != null) {
+            deleteUserRoles(user.getUserId());
+            log.info("after deleteUserRoles");
+            userRepository.delete(user);
+            return userConverter.userToUserDto(user);
+        }
+        return null;
+    }
+
+    public void deleteUserRoles(Long userId) {
+        log.info("inside deleteUserRoles.id: {}", userId);
+        userRepository.deleteUserRolesByUserId(userId);
     }
 }
 

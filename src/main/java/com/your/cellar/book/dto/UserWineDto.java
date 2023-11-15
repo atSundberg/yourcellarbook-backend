@@ -9,6 +9,7 @@ import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Component
 @Data
@@ -49,5 +50,8 @@ public class UserWineDto {
 
     @JsonProperty("is_public")
     private boolean isPublic;
+
+    @JsonProperty("consumed_at")
+    private Set<LocalDateTime> consumedAt;
 
 }

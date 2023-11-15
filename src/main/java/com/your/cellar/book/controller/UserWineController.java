@@ -161,4 +161,24 @@ public class UserWineController {
 
     }
 
+    @PostMapping(value = "/drink", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<BaseResponse<UserWineDto>> drinkWine(@RequestBody UserWineDto userWineRequestDto) {
+        UserWineDto userWineDto = userWineService.handleDrinkWine(userWineRequestDto);
+
+        if (userWineDto != null) {
+            BaseResponse<UserWineDto> response = new BaseResponse<>(
+                    HttpStatus.OK.value(),
+                    messageSource.getMessage("user.wine.drink.success", null, Locale.getDefault()),
+                    userWineDto
+            );
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            BaseResponse<UserWineDto> response = new BaseResponse<>(
+                    HttpStatus.BAD_REQUEST.value(),
+                    messageSource.getMessage("user.wine.drink.error", null, Locale.getDefault()),
+                    null
+            );
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
 }

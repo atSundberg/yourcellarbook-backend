@@ -5,6 +5,9 @@ import com.your.cellar.book.entity.Wine;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.util.Set;
+
 @Component
 @Data
 public class UserWinePublicDto {
@@ -20,6 +23,12 @@ public class UserWinePublicDto {
 
     @JsonProperty("wine")
     private Wine wine;
+
+    @JsonProperty("wineListName")
+    private String wineListName;
+
+    @JsonProperty("consumed_at")
+    private Set<LocalDateTime> consumedAt;
 
 }
 

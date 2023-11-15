@@ -40,11 +40,11 @@ public class User {
 
     private LocalDateTime lastLoggedIn;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(
-            name = "user_role",
-            joinColumns = @JoinColumn(name = "userId", referencedColumnName = "userId"),
-            inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "roleId"))
+            name = "USER_ROLE",
+            joinColumns = @JoinColumn(name = "userId"),
+            inverseJoinColumns = @JoinColumn(name = "roleId"))
     private Set<Role> roles;
 
     public User(String username, String password, Set<Role> roles) {
@@ -71,6 +71,7 @@ public class User {
         return "User{" +
                 "userId=" + userId +
                 ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 ", enabled=" + enabled +
                 ", showWineList=" + showWineList +
                 ", wineListName='" + wineListName + '\'' +
