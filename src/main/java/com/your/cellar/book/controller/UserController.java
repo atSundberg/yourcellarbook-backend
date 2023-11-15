@@ -52,19 +52,6 @@ public class UserController {
         UserResponseModel userResponseModel = userService.fetchUserByUsername(username);
 
         if (userResponseModel != null) {
-            BaseResponse<UserResponseModel> response = new BaseResponse<>(HttpStatus.OK.value(), messageSource.getMessage("user.fetch.by.username.success", null, Locale.getDefault()), userResponseModel);
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } else {
-            BaseResponse<UserResponseModel> response = new BaseResponse<>(HttpStatus.BAD_REQUEST.value(), messageSource.getMessage("user.fetch.by.username.error", null, Locale.getDefault()), null);
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @GetMapping(path = "/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BaseResponse<UserResponseModel>> getUserByUsername(@PathVariable String username) {
-        UserResponseModel userResponseModel = userService.fetchUserByUsername(username);
-
-        if (userResponseModel != null) {
             BaseResponse<UserResponseModel> response = new BaseResponse<>(
                     HttpStatus.OK.value(),
                     messageSource.getMessage("user.fetch.by.username.success", null, Locale.getDefault()),
