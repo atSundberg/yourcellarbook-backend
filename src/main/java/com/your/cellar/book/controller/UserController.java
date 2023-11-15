@@ -90,6 +90,14 @@ public class UserController {
         }
     }
 
+//    @PostMapping(value = "/username", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+//    @PreAuthorize("#userRequestModel.username == authentication.principal.subject")
+//    public ResponseEntity<BaseResponse<UserResponseModel>> editUserDetails(@RequestBody UserRequestModel userRequestModel) {
+//        logger.info("Successfully authorized user with correct username");
+//
+//        return null;
+//    }
+
     @DeleteMapping(value = "/delete", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
     public ResponseEntity<BaseResponse<UserResponseModel>> deleteUser(@RequestBody UserRequestModel userRequestModel) {

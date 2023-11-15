@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 @Service
 public class UserWineService {
 
+    private static final Integer ZERO = 0;
     private static final Logger LOG = LoggerFactory.getLogger(UserWineService.class);
     private UserWineRepository userWineRepository;
     private WineService wineService;
@@ -123,17 +124,6 @@ public class UserWineService {
         return null;
     }
 
-//    private void addWineToWineList(UserWine userWine) {
-//        WineList wineList = userWine.getWineList();
-//
-//        if (wineList == null) {
-//            wineList = new WineList();
-//            wineList.setUser(findUserById(userWine.getId().getUserId()));
-//            wineList.setWines(new HashSet<>());
-//            wineList.getWines().add(userWine);
-//            wineListRepository.save(wineList);
-//        }
-//    }
 
     public Set<Set<UserWinePublicDto>> fetchAllPublicWines() {
         List<UserWine> userWines = userWineRepository.findAll();
@@ -146,17 +136,41 @@ public class UserWineService {
             }
         }
         for (Long id : userIds) {
-            Set<UserWinePublicDto> userWinePublicDtosDtos = userWineRepository.findByUserId(id)
+            String wineListName = Objects.requireNonNull(userRepository.findById(id).orElse(null)).getWineListName();
+            Set<UserWinePublicDto> userWinePublicDtos = userWineRepository.findByUserId(id)
                     .stream()
                     .map(userWine ->
                             userWineConverter.userWineToUserWineDto(userWine))
-                    .map(userWineDto ->
-                            userWinePublicConverter.userWineDtoToUserWinePublicDto(userWineDto)
-                            )
+                    .map(userWineDto -> {
+                                UserWinePublicDto userWinePublicDto = userWinePublicConverter.userWineDtoToUserWinePublicDto(userWineDto);
+                                userWinePublicDto.setWineListName(wineListName);
+                                return userWinePublicDto;
+                            }
+                    )
                     .collect(Collectors.toSet());
-            userWinePublicDtosSet.add(userWinePublicDtosDtos);
+            userWinePublicDtosSet.add(userWinePublicDtos);
         }
         return userWinePublicDtosSet;
     }
 
+    public UserWineDto handleDrinkWine(UserWineDto userWineRequestDto) {
+        UserWine userWine = userWineRepository.findById(userWineRequestDto.getId()).orElse(null);
+        LOG.info("Input DTO: {}", userWineRequestDto);
+        LOG.info("Input converted userWine: {}", userWine);
+
+        if (userWine != null) {
+            userWine.setQuantity(userWineRequestDto.getQuantity() <= ZERO ? ZERO : userWineRequestDto.getQuantity());
+            userWine.setFinished(Objects.equals(userWine.getQuantity(), ZERO));
+            userWine.setThoughts(userWineRequestDto.getThoughts());
+            userWine.setRating(userWineRequestDto.getRating());
+            userWine.getConsumedAt().add(LocalDateTime.now());
+            userWine = userWineRepository.save(userWine);
+
+            LOG.info("Updated userWine: {}", userWine);
+
+            return userWineConverter.userWineToUserWineDto(userWine);
+        }
+
+        return null;
+    }
 }

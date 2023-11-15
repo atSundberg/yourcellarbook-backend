@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -56,6 +57,10 @@ public class UserWine {
 
     @Column(name = "is_public", columnDefinition = "boolean default true")
     private boolean isPublic;
+
+    @ElementCollection
+    @Column(name = "consumed_at")
+    private Set<LocalDateTime> consumedAt;
 
     @Override
     public boolean equals(Object o) {
