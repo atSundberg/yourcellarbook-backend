@@ -97,19 +97,6 @@ public class UserController {
         }
     }
 
-    @PutMapping(path = "/winelist", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BaseResponse<UserResponseModel>> updateShowWineList(@RequestBody UserRequestModel userRequestModel) {
-
-        UserResponseModel userResponseModel = userService.updateShowWineListStatus(userRequestModel);
-
-        if (userResponseModel != null) {
-            BaseResponse<UserResponseModel> response = new BaseResponse<>(HttpStatus.OK.value(), messageSource.getMessage("user.update.show.wines.success", null, Locale.getDefault()), userResponseModel);
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } else {
-            BaseResponse<UserResponseModel> response = new BaseResponse<>(HttpStatus.BAD_REQUEST.value(), messageSource.getMessage("user.update.show.wines.error", null, Locale.getDefault()), null);
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-        }
-    }
 
 //    @PostMapping(value = "/username", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 //    @PreAuthorize("#userRequestModel.username == authentication.principal.subject")
