@@ -4,6 +4,7 @@ import com.your.cellar.book.dto.AuthenticationResponse;
 import com.your.cellar.book.dto.BaseResponse;
 import com.your.cellar.book.dto.request.UserRequestModel;
 import com.your.cellar.book.service.TokenService;
+import com.your.cellar.book.service.UserLogService;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +30,15 @@ import java.util.Locale;
 public class AuthController {
     private final TokenService tokenService;
     private final AuthenticationManager authenticationManager;
+
+    private UserLogService userLogService;
     private MessageSource messageSource;
 
     @Autowired
-    public AuthController(TokenService tokenService, AuthenticationManager authenticationManager, MessageSource messageSource) {
+    public AuthController(TokenService tokenService, AuthenticationManager authenticationManager, UserLogService userLogService, MessageSource messageSource) {
         this.tokenService = tokenService;
         this.authenticationManager = authenticationManager;
+        this.userLogService = userLogService;
         this.messageSource = messageSource;
     }
 
@@ -49,6 +53,7 @@ public class AuthController {
                     messageSource.getMessage("token.generated.successfully", null, Locale.getDefault()),
                     authenticationResponse
             );
+            userLogService.logUserSignIn(authentication.getName());
             return new ResponseEntity<>(response, HttpStatus.OK);
 
         } else {
