@@ -34,7 +34,8 @@ public class UserController {
         this.messageSource = messageSource;
     }
 
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
     public ResponseEntity<BaseResponse<Set<User>>> getAllUsers() {
         Set<User> users = userService.fetchAllUsers();
 

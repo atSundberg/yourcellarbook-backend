@@ -3,10 +3,9 @@ package com.your.cellar.book.controller;
 import com.your.cellar.book.dto.BaseResponse;
 import com.your.cellar.book.dto.UserWineDto;
 import com.your.cellar.book.dto.UserWinePublicDto;
-import com.your.cellar.book.repository.UserWineRepository;
+import com.your.cellar.book.service.UserLogService;
 import com.your.cellar.book.service.UserWineService;
 import com.your.cellar.book.service.WineService;
-import lombok.extern.java.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +26,14 @@ public class UserWineController {
     private MessageSource messageSource;
     private UserWineService userWineService;
     private WineService wineService;
+    private UserLogService userLogService;
 
     @Autowired
-    public UserWineController(MessageSource messageSource, UserWineService userWineService, WineService wineService) {
+    public UserWineController(MessageSource messageSource, UserWineService userWineService, WineService wineService, UserLogService userLogService) {
         this.messageSource = messageSource;
         this.userWineService = userWineService;
         this.wineService = wineService;
+        this.userLogService = userLogService;
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -67,6 +68,7 @@ public class UserWineController {
                     messageSource.getMessage("user.wine.addition.success", null, Locale.getDefault()),
                     userWineDto
             );
+            userLogService.logDataModification(userWineDto.getUser().getUsername(), "add-new-userwine");
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         } else {
             BaseResponse<UserWineDto> response = new BaseResponse<>(
@@ -171,6 +173,7 @@ public class UserWineController {
                     messageSource.getMessage("user.wine.drink.success", null, Locale.getDefault()),
                     userWineDto
             );
+            userLogService.logDataModification(userWineDto.getUser().getUsername(), "drink-wine");
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
             BaseResponse<UserWineDto> response = new BaseResponse<>(
