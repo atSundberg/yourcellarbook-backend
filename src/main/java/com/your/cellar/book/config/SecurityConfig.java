@@ -65,6 +65,7 @@ public class SecurityConfig {
                         .requestMatchers("/user/wine/public").permitAll()
                         .requestMatchers("/users/signup").permitAll()
                         .requestMatchers("/admin").hasAuthority(ADMIN)
+                        .requestMatchers("/actuator/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -93,7 +94,7 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000", "http://www.yourcellarbook.com"));
+        configuration.setAllowedOrigins(List.of("http://localhost:3000", "https://www.yourcellarbook.com"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
